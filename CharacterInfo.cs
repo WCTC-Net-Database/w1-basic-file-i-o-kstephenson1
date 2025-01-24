@@ -1,0 +1,139 @@
+﻿using CsvHelper;
+using CsvHelper.Configuration.Attributes;
+using System.Globalization;
+using Week1_assignment_ksteph.DataHelper;
+
+namespace Week1_assignment_ksteph;
+public class CharacterInfo
+{
+    // Properties with Attributes for use with CSVHelper Headers
+    [Name("Name")]
+    public required string Name { get; set; }
+
+    [Name("Class")]
+    public required string CharacterClass { get; set; }
+
+    [Name("Level")]
+    public required int Level { get; set; }
+
+    [Name("Hit Points")]
+    public required int HitPoints { get; set; }
+
+    [Name("Inventory")]
+    public string? Inventory { get; set; }
+
+
+    public static void DisplayAllCharacters()
+    {
+        string input = "input.csv";
+
+        using StreamReader reader = new(input);
+        using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
+
+        IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
+
+        foreach (CharacterInfo record in records)
+        {
+            Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
+
+            Console.WriteLine($"Inventory:");
+            ListInventory(record.Inventory);
+        }
+    }
+
+    //public static void test()
+    //{
+    //    string input = "input.csv";
+    //    string output = "output.csv";
+    //    List<CharacterInfo> outputCharacters = new();
+
+    //    using StreamReader reader = new(input);
+    //    using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
+
+    //    IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
+
+    //    foreach (CharacterInfo record in records)
+    //    {
+    //        Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
+
+    //        Console.WriteLine($"Inventory:");
+    //        ListInventory(record.Inventory);
+
+    //        if (true)
+    //        {
+    //            outputCharacters.Add(record);
+    //        }
+    //    }
+
+    //    using StreamWriter writer = new(output);
+    //    using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
+
+    //    csvOut.WriteRecords(outputCharacters);
+    //}
+
+    public static void NewCharacter()
+    {
+        string name = Input.GetString("Enter your character's name: ");
+        string characterClass = Input.GetString("Enter your character's class: ");
+        int level = Input.GetInt("Enter your character's level: ", 1, "must be greater than 0");
+        int hitPoints = Input.GetInt("Enter your character's maximum hit points: ", 1, "must be greater than 0");
+        string? inventory = Input.GetString("Enter your character's equipment (separate items with a '|'): ", false);
+
+        Console.WriteLine($"Welcome, {name} the {characterClass}! You are level {level} and your equipment includes: {string.Join(", ", inventory)}.");
+
+        string input = "input.csv";
+        string newCharacter = $"{name},{characterClass},{level},{hitPoints},{inventory}";
+
+        using (StreamWriter writer = new(input, true))
+        {
+            Console.WriteLine("Enter new character's name: ");
+            writer.WriteLine(newCharacter);
+        }
+    }
+
+    public static void LevelUp()
+    {
+        string levelingCharacter = Input.GetString("Please enter the name of the character you would like to level up: ");
+
+        string input = "input.csv";
+        string output = input;
+        List<CharacterInfo> outputCharacters = new();
+
+        using (StreamReader reader = new(input))
+        using (CsvReader csv = new(reader, CultureInfo.InvariantCulture))
+        {
+            IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
+
+            foreach (CharacterInfo record in records)
+            {
+                if (record.Name == levelingCharacter)
+                {
+                    record.Level += 1;
+                }
+                outputCharacters.Add(record);
+            }
+        }
+
+        using StreamWriter writer = new(output);
+        using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
+
+        csvOut.WriteRecords(outputCharacters);
+    }
+
+    static void ListInventory(string inventory)
+    {
+        if (inventory == "")
+        {
+            Console.WriteLine("    - (Empty)");
+        }
+        else
+        {
+            string[] items = inventory.Split('|');
+            foreach (string item in items)
+            {
+                Console.WriteLine($"    - {item}");
+            }
+            Console.WriteLine("\n");
+        }
+    }
+}

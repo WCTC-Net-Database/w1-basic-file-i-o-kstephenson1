@@ -1,22 +1,43 @@
 ﻿namespace Week1_assignment_ksteph;
 
+using DataHelper;
+
 class Program
 {
     static void Main()
     {
-        //.
-        Console.Write("Enter your character's name: ");
-        string name = Console.ReadLine();
+        // Will run until exit is selected
+        while(true)
+        {
+            ShowMenu();
+            int selection = Input.GetInt("", 1, 4, "Value must be between 1-4", "Value must be between 1-4");
+            if (selection == 4) break;
+            switch (selection)
+            {
+                case 1:
+                    CharacterInfo.DisplayAllCharacters();
+                    break;
+                case 2:
+                    CharacterInfo.NewCharacter();
+                    break;
+                case 3:
+                    CharacterInfo.LevelUp();
+                    break;
+            }
+        }
+        
+        Console.WriteLine("Thank you for using the RPG Character Editor.");
+    }
 
-        Console.Write("Enter your character's class: ");
-        string characterClass = Console.ReadLine();
-
-        Console.Write("Enter your character's level: ");
-        int level = int.Parse(Console.ReadLine());
-
-        Console.Write("Enter your character's equipment (separate items with a '|'): ");
-        string[] equipment = Console.ReadLine().Split('|');
-
-        Console.WriteLine($"Welcome, {name} the {characterClass}! You are level {level} and your equipment includes: {string.Join(", ", equipment)}.");
+    static void ShowMenu()
+    {
+        Console.WriteLine(
+            "      Main Menu      \n" +
+            "---------------------\n" +
+            "1. Display Characters\n" +
+            "2. New Character\n" +
+            "3. Level Up Character\n" +
+            "4. Exit\n" +
+            "---------------------\n");
     }
 }
