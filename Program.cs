@@ -25,8 +25,14 @@ class Program
                     break;
             }
         }
-        
-        Console.WriteLine("Thank you for using the RPG Character Editor.");
+
+        Console.Clear();
+        Console.WriteLine(
+            "\n\n\n\n\n\n\n\n\n" +
+            "          ╔═════════════════════════════════════════════════════╗\n" +
+            "          ║    Thank you for using the RPG Character Editor.    ║\n" +
+            "          ╚═════════════════════════════════════════════════════╝\n" +
+            "\n\n\n\n\n\n\n\n\n");
     }
 
     static void ShowMenu()

@@ -25,6 +25,7 @@ public class CharacterInfo
 
     public static void DisplayAllCharacters()
     {
+        Console.Clear();
         string input = "input.csv";
 
         using StreamReader reader = new(input);
@@ -49,14 +50,14 @@ public class CharacterInfo
         int hitPoints = Input.GetInt("Enter your character's maximum hit points: ", 1, "must be greater than 0");
         string? inventory = Input.GetString("Enter your character's equipment (separate items with a '|'): ", false);
 
-        Console.WriteLine($"Welcome, {name} the {characterClass}! You are level {level} and your equipment includes: {string.Join(", ", inventory)}.");
+        Console.Clear();
+        Console.WriteLine($"\nWelcome, {name} the {characterClass}! You are level {level} and your equipment includes: {string.Join(", ", inventory)}.\n");
 
         string input = "input.csv";
         string newCharacter = $"{name},{characterClass},{level},{hitPoints},{inventory}";
 
         using (StreamWriter writer = new(input, true))
         {
-            Console.WriteLine("Enter new character's name: ");
             writer.WriteLine(newCharacter);
         }
     }
@@ -64,6 +65,7 @@ public class CharacterInfo
     public static void LevelUp()
     {
         string levelingCharacter = Input.GetString("Please enter the name of the character you would like to level up: ");
+        Console.Clear();
 
         string input = "input.csv";
         string output = input;
