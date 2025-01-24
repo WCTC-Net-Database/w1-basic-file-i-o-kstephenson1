@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>W1_assignment_template</RootNamespace>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Week1_assignment_ksteph</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>

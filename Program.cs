@@ -1,7 +1,10 @@
-﻿class Program
+﻿namespace Week1_assignment_ksteph;
+
+class Program
 {
     static void Main()
     {
+        //.
         Console.Write("Enter your character's name: ");
         string name = Console.ReadLine();
 
