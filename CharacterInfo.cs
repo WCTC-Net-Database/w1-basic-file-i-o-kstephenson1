@@ -41,36 +41,6 @@ public class CharacterInfo
         }
     }
 
-    //public static void test()
-    //{
-    //    string input = "input.csv";
-    //    string output = "output.csv";
-    //    List<CharacterInfo> outputCharacters = new();
-
-    //    using StreamReader reader = new(input);
-    //    using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
-
-    //    IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
-
-    //    foreach (CharacterInfo record in records)
-    //    {
-    //        Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
-
-    //        Console.WriteLine($"Inventory:");
-    //        ListInventory(record.Inventory);
-
-    //        if (true)
-    //        {
-    //            outputCharacters.Add(record);
-    //        }
-    //    }
-
-    //    using StreamWriter writer = new(output);
-    //    using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
-
-    //    csvOut.WriteRecords(outputCharacters);
-    //}
-
     public static void NewCharacter()
     {
         string name = Input.GetString("Enter your character's name: ");
@@ -97,6 +67,7 @@ public class CharacterInfo
 
         string input = "input.csv";
         string output = input;
+        int amtLeveled = 0;
         List<CharacterInfo> outputCharacters = new();
 
         using (StreamReader reader = new(input))
@@ -109,6 +80,7 @@ public class CharacterInfo
                 if (record.Name == levelingCharacter)
                 {
                     record.Level += 1;
+                    amtLeveled += 1;
                 }
                 outputCharacters.Add(record);
             }
@@ -118,6 +90,15 @@ public class CharacterInfo
         using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
 
         csvOut.WriteRecords(outputCharacters);
+        if (amtLeveled > 0)
+        {
+            Console.WriteLine($"{amtLeveled} characters leveled up!");
+        }
+        else
+        {
+            Console.WriteLine($"No characters with that name found.");
+        }
+
     }
 
     static void ListInventory(string inventory)
@@ -137,3 +118,33 @@ public class CharacterInfo
         }
     }
 }
+
+//public static void test()
+//{
+//    string input = "input.csv";
+//    string output = "output.csv";
+//    List<CharacterInfo> outputCharacters = new();
+
+//    using StreamReader reader = new(input);
+//    using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
+
+//    IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
+
+//    foreach (CharacterInfo record in records)
+//    {
+//        Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
+
+//        Console.WriteLine($"Inventory:");
+//        ListInventory(record.Inventory);
+
+//        if (true)
+//        {
+//            outputCharacters.Add(record);
+//        }
+//    }
+
+//    using StreamWriter writer = new(output);
+//    using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
+
+//    csvOut.WriteRecords(outputCharacters);
+//}

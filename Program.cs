@@ -32,12 +32,13 @@ class Program
     static void ShowMenu()
     {
         Console.WriteLine(
-            "      Main Menu      \n" +
-            "---------------------\n" +
-            "1. Display Characters\n" +
-            "2. New Character\n" +
-            "3. Level Up Character\n" +
-            "4. Exit\n" +
-            "---------------------\n");
+            "╔═════════════════════════╗\n" +
+            "║        Main Menu        ║\n" +
+            "╠═════════════════════════╣\n" +
+            "║1. Display Characters    ║\n" +
+            "║2. New Character         ║\n" +
+            "║3. Level Up Character    ║\n" +
+            "║4. Exit                  ║\n" +
+            "╚═════════════════════════╝\n");
     }
 }
