@@ -1,7 +1,6 @@
 ﻿namespace Week1_assignment_ksteph.DataHelper;
 
 using System.Diagnostics;
-using Microsoft.Win32.SafeHandles;
 
 class Input
 {
@@ -57,6 +56,42 @@ class Input
             if (response > maxValue)
             {
                 Console.WriteLine($"That number is not valid. Please try again. ({maxValueErrorMessage})");
+                continue;
+            }
+            else
+            {
+                return response;
+            }
+        } while (true);
+    }
+
+    public static int GetInt(int minValue, int maxValue, string minValueErrorMessage, string maxValueErrorMessage)
+    {
+        int response;
+        do
+        {
+            response = GetInt("", minValue, minValueErrorMessage);
+            if (response > maxValue)
+            {
+                Console.WriteLine($"That number is not valid. Please try again. ({maxValueErrorMessage})");
+                continue;
+            }
+            else
+            {
+                return response;
+            }
+        } while (true);
+    }
+
+    public static int GetInt(int minValue, int maxValue, string valueErrorMessage)
+    {
+        int response;
+        do
+        {
+            response = GetInt("", minValue, valueErrorMessage);
+            if (response > maxValue)
+            {
+                Console.WriteLine($"That number is not valid. Please try again. ({valueErrorMessage})");
                 continue;
             }
             else

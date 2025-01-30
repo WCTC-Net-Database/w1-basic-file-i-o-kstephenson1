@@ -23,7 +23,7 @@ public class CharacterInfo
     public string? Inventory { get; set; }
 
 
-    public static void DisplayAllCharacters()
+    public static void DisplayAllCharacters() //Displays each character's Name, 
     {
         Console.Clear();
         string input = "input.csv";
@@ -35,7 +35,7 @@ public class CharacterInfo
 
         foreach (CharacterInfo record in records)
         {
-            Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
+            Console.WriteLine($"{record.Name}  |  Level {record.Level} {record.CharacterClass}  |  HP: {record.HitPoints}");
 
             Console.WriteLine($"Inventory:");
             ListInventory(record.Inventory);
@@ -94,7 +94,7 @@ public class CharacterInfo
         csvOut.WriteRecords(outputCharacters);
         if (amtLeveled > 0)
         {
-            Console.WriteLine($"{amtLeveled} characters leveled up!");
+            Console.WriteLine($"\n{amtLeveled} characters leveled up!\n");
         }
         else
         {
@@ -103,7 +103,7 @@ public class CharacterInfo
 
     }
 
-    static void ListInventory(string inventory)
+    static void ListInventory(string inventory) // Takes the inventory string from the csv file, splits it, and displays the inventory to the user.
     {
         if (inventory == "")
         {
@@ -120,33 +120,3 @@ public class CharacterInfo
         }
     }
 }
-
-//public static void test()
-//{
-//    string input = "input.csv";
-//    string output = "output.csv";
-//    List<CharacterInfo> outputCharacters = new();
-
-//    using StreamReader reader = new(input);
-//    using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
-
-//    IEnumerable<CharacterInfo> records = csv.GetRecords<CharacterInfo>();
-
-//    foreach (CharacterInfo record in records)
-//    {
-//        Console.WriteLine($"Name - {record.Name}  |  Class - {record.CharacterClass}  |  Level - {record.Level}  |  Hit Points - {record.HitPoints}");
-
-//        Console.WriteLine($"Inventory:");
-//        ListInventory(record.Inventory);
-
-//        if (true)
-//        {
-//            outputCharacters.Add(record);
-//        }
-//    }
-
-//    using StreamWriter writer = new(output);
-//    using CsvWriter csvOut = new(writer, CultureInfo.InvariantCulture);
-
-//    csvOut.WriteRecords(outputCharacters);
-//}

@@ -10,9 +10,9 @@ class Program
         while(true)
         {
             ShowMenu();
-            int selection = Input.GetInt("", 1, 4, "Value must be between 1-4", "Value must be between 1-4");
-            if (selection == 4) break;
-            switch (selection)
+            int selection = Input.GetInt(1, 4, "Value must be between 1-4"); // Uses a helper file to get an int between 1-4 from the user
+            if (selection == 4) break; // Exits the program if '4' is selected.
+            switch (selection) // Checks the input from the user and responds appropriately.
             {
                 case 1:
                     CharacterInfo.DisplayAllCharacters();
